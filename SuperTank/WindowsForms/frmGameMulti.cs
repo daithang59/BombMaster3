@@ -54,7 +54,7 @@ namespace SuperTank
         private const int POSITION_UPDATE_INTERVAL_MS = 100; // Thời gian tối thiểu giữa các lần gửi (ms)
         public frmGameMulti()
         {
-            this.level = 7;
+            this.level = 10;
             this.Size = new Size(500, 640);
             InitializeComponent();
             // Đăng ký sự kiện

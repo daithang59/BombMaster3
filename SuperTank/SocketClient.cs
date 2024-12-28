@@ -425,71 +425,78 @@ namespace SuperTank
             if (payload.Length < 5) return;
 
             string playerName = payload[1];
-            string directionString = payload[2]; // Tạm lưu payload[2] vào một biến string
-            int X = int.Parse(payload[3]);
-            int Y = int.Parse(payload[4]);
+            string directionString = payload[2];
 
-            if (int.TryParse(directionString, out int direction))
+            // Sử dụng TryParse cho cả X và Y
+            if (int.TryParse(payload[3], out int X) && int.TryParse(payload[4], out int Y))
             {
-                PlayerTank playerToUpdate;
-
-                lock (playersLock)
+                // Xử lý direction
+                if (int.TryParse(directionString, out int direction))
                 {
-                    Debug.WriteLine($"HandlePlayerPosition: Searching for player: {playerName}");
-                    playerToUpdate = players.FirstOrDefault(p => p.Name == playerName);
+                    PlayerTank playerToUpdate;
 
-                    Debug.WriteLine("Current players in list:");
-                    foreach (var p in players)
+                    lock (playersLock)
                     {
-                        Debug.WriteLine($"- {p.Name}");
-                    }
+                        Debug.WriteLine($"HandlePlayerPosition: Searching for player: {playerName}");
+                        playerToUpdate = players.FirstOrDefault(p => p.Name == playerName);
 
-                    if (playerToUpdate == null)
-                    {
-                        Debug.WriteLine($"Player not found: {playerName}. Adding to list.");
-                        playerToUpdate = new PlayerTank { Name = playerName };
-
-                        // Kiểm tra giá trị direction hợp lệ
-                        if (Enum.IsDefined(typeof(Direction), direction))
+                        Debug.WriteLine("Current players in list:");
+                        foreach (var p in players)
                         {
-                            playerToUpdate.DirectionTank = (General.Direction)direction;
+                            Debug.WriteLine($"- {p.Name}");
+                        }
+
+                        if (playerToUpdate == null)
+                        {
+                            Debug.WriteLine($"Player not found: {playerName}. Adding to list.");
+                            playerToUpdate = new PlayerTank { Name = playerName };
+
+                            // Kiểm tra giá trị direction hợp lệ
+                            if (Enum.IsDefined(typeof(Direction), direction))
+                            {
+                                playerToUpdate.DirectionTank = (General.Direction)direction;
+                            }
+                            else
+                            {
+                                Debug.WriteLine($"Invalid direction received: {direction}. Using default.");
+                                // Gán giá trị mặc định nếu direction không hợp lệ
+                                playerToUpdate.DirectionTank = General.Direction.eUp;
+                            }
+
+                            players.Add(playerToUpdate);
                         }
                         else
                         {
-                            Debug.WriteLine($"Invalid direction received: {direction}. Using default.");
-                            // Gán giá trị mặc định nếu direction không hợp lệ
-                            playerToUpdate.DirectionTank = General.Direction.eUp;
+                            // Kiểm tra giá trị direction hợp lệ
+                            if (Enum.IsDefined(typeof(Direction), direction))
+                            {
+                                playerToUpdate.DirectionTank = (General.Direction)direction;
+                            }
+                            else
+                            {
+                                Debug.WriteLine($"Invalid direction received: {direction}. Using default.");
+                                // Gán giá trị mặc định nếu direction không hợp lệ
+                                playerToUpdate.DirectionTank = General.Direction.eUp;
+                            }
                         }
+                    }
 
-                        players.Add(playerToUpdate);
-                    }
-                    else
-                    {
-                        // Kiểm tra giá trị direction hợp lệ
-                        if (Enum.IsDefined(typeof(Direction), direction))
-                        {
-                            playerToUpdate.DirectionTank = (General.Direction)direction;
-                        }
-                        else
-                        {
-                            Debug.WriteLine($"Invalid direction received: {direction}. Using default.");
-                            // Gán giá trị mặc định nếu direction không hợp lệ
-                            playerToUpdate.DirectionTank = General.Direction.eUp;
-                        }
-                    }
+                    // Cập nhật vị trí
+                    playerToUpdate.Position = new PointF(X * Common.STEP, Y * Common.STEP); // Đã sửa
+
+                    // Kích hoạt sự kiện để cập nhật giao diện (chỉ gọi 1 lần)
+                    OnPlayerPositionUpdated?.Invoke(playerToUpdate);
                 }
-
-                // Cập nhật vị trí (dạng số ô)
-                // Nếu client đã gửi tọa độ dạng số ô (đã chia cho Common.STEP) thì không cần nhân ở đây
-                playerToUpdate.Position = new PointF(X * Common.STEP, Y * Common.STEP);
-
-                // Kích hoạt sự kiện để cập nhật giao diện
-                OnPlayerPositionUpdated?.Invoke(playerToUpdate);
+                else
+                {
+                    Debug.WriteLine($"Invalid direction format: {directionString}");
+                    // Xử lý trường hợp direction không phải là số nguyên hợp lệ (có thể bỏ qua hoặc log lỗi)
+                }
             }
             else
             {
-                Debug.WriteLine($"Invalid direction format: {directionString}");
-                // Xử lý trường hợp direction không phải là số nguyên hợp lệ (có thể bỏ qua hoặc log lỗi)
+                Debug.WriteLine($"Invalid X or Y format. X: {payload[3]}, Y: {payload[4]}");
+                // Xử lý trường hợp X hoặc Y không phải là số nguyên hợp lệ (có thể bỏ qua hoặc log lỗi)
             }
         }
 

@@ -1,0 +1,52 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\THANG\\source\\repos\\DUDIMEBOMBMASTER\\pexa2612\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{49F5BC8B-5D4B-4913-BD9B-C39295778F89}|SuperTank\\SuperTank.csproj|c:\\users\\thang\\source\\repos\\dudimebombmaster\\pexa2612\\supertank\\lobby.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{49F5BC8B-5D4B-4913-BD9B-C39295778F89}|SuperTank\\SuperTank.csproj|solutionrelative:supertank\\lobby.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{49F5BC8B-5D4B-4913-BD9B-C39295778F89}|SuperTank\\SuperTank.csproj|C:\\Users\\THANG\\source\\repos\\DUDIMEBOMBMASTER\\pexa2612\\supertank\\lobby.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{49F5BC8B-5D4B-4913-BD9B-C39295778F89}|SuperTank\\SuperTank.csproj|solutionrelative:supertank\\lobby.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 100,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Lobby.cs",
+              "DocumentMoniker": "C:\\Users\\THANG\\source\\repos\\DUDIMEBOMBMASTER\\pexa2612\\SuperTank\\Lobby.cs",
+              "RelativeDocumentMoniker": "SuperTank\\Lobby.cs",
+              "ToolTip": "C:\\Users\\THANG\\source\\repos\\DUDIMEBOMBMASTER\\pexa2612\\SuperTank\\Lobby.cs",
+              "RelativeToolTip": "SuperTank\\Lobby.cs",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAIwGMAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T03:51:08.522Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Lobby.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\THANG\\source\\repos\\DUDIMEBOMBMASTER\\pexa2612\\SuperTank\\Lobby.cs",
+              "RelativeDocumentMoniker": "SuperTank\\Lobby.cs",
+              "ToolTip": "C:\\Users\\THANG\\source\\repos\\DUDIMEBOMBMASTER\\pexa2612\\SuperTank\\Lobby.cs [Design]",
+              "RelativeToolTip": "SuperTank\\Lobby.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T03:51:06.975Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
